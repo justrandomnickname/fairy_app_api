@@ -1,0 +1,34 @@
+{
+  "name": "fairy_chat",
+  "version": "0.0.1",
+  "description": "Chat service for fairy app.",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "serve:watch": "concurrently \"redis-server\" \"NODE_ENV=development webpack\"",
+    "served": "NODE_ENV=development nodemon build/index.js"
+  },
+  "author": "me",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^13.7.7",
+    "@types/redis": "^2.8.16",
+    "@types/socket.io": "^2.1.4",
+    "nodemon": "^2.0.2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2",
+    "webpack-shell-plugin": "^0.5.0"
+  },
+  "dependencies": {
+    "concurrently": "^5.1.0",
+    "express": "^4.17.1",
+    "firebase-admin": "^8.9.2",
+    "redis": "^3.0.2",
+    "socket.io": "^2.3.0"
+  }
+}

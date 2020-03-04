@@ -1,0 +1,48 @@
+<!-- ./client/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onClick="sendMsg()">Hit Me</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+      
+      const extraHeaders = {
+        'key': 'value'
+      }
+      const socket = io("http://localhost:3332", {
+        query: extraHeaders,
+      });
+      // s
+      socket.on("connect", () => {
+        socket.emit("connect_user", { uid: "my_uid" });
+        // socket.emit("join", { uid: "my_uid:my_other_uid" });
+        socket.emit("invite", {
+          to: "my_other_uid",
+          from: "my_uid"
+        });
+      });
+
+      socket.on("broadcast", msg => {
+        console.log("MSG IS", msg);
+      });
+
+      socket.on("receive_message", msg => {
+        console.log("MESSAGE IS", msg);
+      });
+
+      function sendMsg() {
+        socket.emit("broadcast", {
+          msg: "HELLO YOU TOO",
+          room: "my_uid:my_other_uid",
+        });
+      }
+    </script>
+  </body>
+</html>
